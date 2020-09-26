@@ -1,7 +1,5 @@
 <div>
   <div style="max-width: 350px; margin: auto;">
-    <h2 style="text-align: center; margin-top: 20px;">Calculator For Dad</h2>
-
     <form nz-form [formGroup]="calTypeForm" [nzLayout]="'horizontal'">
       <nz-form-item>
         <nz-form-label [nzXs]="6" nzRequired>계산 방식</nz-form-label>
@@ -25,7 +23,7 @@
       <nz-form-item>
         <nz-form-label [nzSm]="6" nzRequired nzFor="baseCount">기준값 수량</nz-form-label>
         <nz-form-control [nzSm]="14">
-          <input nz-input ftype=number ormControlName="baseCount" id="baseCount"/>
+          <input nz-input type=number formControlName="baseCount" id="baseCount"/>
         </nz-form-control>
       </nz-form-item>
 
