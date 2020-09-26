@@ -18,6 +18,7 @@ export class CalculatorComponent implements OnInit {
   rDiscrepancyRate: string;
   rCurrentData: string;
   rTotalMoney: string;
+  rSumMoeny: string;
   selectedData: SELECTED_TYPE = 'sCurrentData';
 
   constructor(
@@ -57,6 +58,7 @@ export class CalculatorComponent implements OnInit {
     this.rCount = ((baseData * baseCount - balancedData) / (balancedData + Number(this.rCurrentData))).toFixed(3);
     this.rTotalMoney = (Number(this.rCount) * Number(this.rCurrentData)).toFixed(0);
     this.rBaseMoney = (Number(baseData) * Number(baseCount)).toFixed(0);
+    this.rSumMoeny = (Number(baseData) + Number(this.rTotalMoney)).toFixed(0);
   }
 
   numberValidator = (control: FormControl) =>
