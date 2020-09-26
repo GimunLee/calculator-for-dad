@@ -6,6 +6,10 @@ nz-form-item {
   margin-bottom: 3px !important;
 }
 
+p{
+  margin-bottom: 5px !important;
+}
+
 /*.ant-form .ant-form-item .ant-form-item-control, .ant-form .ant-form-item .ant-form-item-label {*/
 /*  flex: 0 0 50% !important;*/
 /*  max-width: 100% !important;*/
