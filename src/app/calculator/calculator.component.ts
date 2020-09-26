@@ -10,10 +10,10 @@ declare type SELECTED_TYPE = 'sCurrentData' | 'sDiscrepancyRate';
   styleUrls: ['./calculator.component.css']
 })
 export class CalculatorComponent implements OnInit {
-
-
   calBalancedPointForm: FormGroup;
   calTypeForm: FormGroup;
+
+  rBaseMoney: string;
   rCount: string;
   rDiscrepancyRate: string;
   rCurrentData: string;
@@ -56,6 +56,7 @@ export class CalculatorComponent implements OnInit {
 
     this.rCount = ((baseData * baseCount - balancedData) / (balancedData + Number(this.rCurrentData))).toFixed(3);
     this.rTotalMoney = (Number(this.rCount) * Number(this.rCurrentData)).toFixed(0);
+    this.rBaseMoney = (Number(baseData) * Number(baseCount)).toFixed(0);
   }
 
   numberValidator = (control: FormControl) =>
@@ -92,6 +93,7 @@ export class CalculatorComponent implements OnInit {
       this.calBalancedPointForm.addControl('discrepancyRate', new FormControl('', [Validators.required], [this.numberValidator]));
     } else if (this.selectedData === 'sCurrentData') {
       this.calBalancedPointForm.removeControl('discrepancyRate');
+      this.calBalancedPointForm.addControl('currentData', new FormControl('', [Validators.required], [this.numberValidator]));
     }
   }
 }

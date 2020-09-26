@@ -4,8 +4,8 @@
 
     <form nz-form [formGroup]="calTypeForm" [nzLayout]="'horizontal'">
       <nz-form-item>
-        <nz-form-label [nzSm]="6" nzRequired>계산 방식</nz-form-label>
-        <nz-form-control [nzSm]="14">
+        <nz-form-label [nzXs]="6" nzRequired>계산 방식</nz-form-label>
+        <nz-form-control [nzXs]="14">
           <nz-select formControlName="calType" (ngModelChange)="selectType($event)">
             <nz-option nzValue="sCurrentData" nzLabel="현재값으로 계산"></nz-option>
             <nz-option nzValue="sDiscrepancyRate" nzLabel="괴리율로 계산"></nz-option>
@@ -17,40 +17,40 @@
     <form nz-form [formGroup]="calBalancedPointForm" (ngSubmit)="calculate()">
       <nz-form-item>
         <nz-form-label [nzSm]="6" nzRequired nzFor="baseData">기준값</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzErrorTip]="numberErrorTpl">
-          <input nz-input formControlName="baseData" id="baseData"/>
+        <nz-form-control [nzSm]="14">
+          <input nz-input type=number formControlName="baseData" id="baseData"/>
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSm]="6" nzRequired nzFor="baseCount">기준값 수량</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzErrorTip]="numberErrorTpl">
-          <input nz-input formControlName="baseCount" id="baseCount"/>
+        <nz-form-control [nzSm]="14">
+          <input nz-input ftype=number ormControlName="baseCount" id="baseCount"/>
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSm]="6" nzRequired nzFor="balancedData">균형값</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzErrorTip]="numberErrorTpl">
-          <input nz-input formControlName="balancedData" id="balancedData"/>
+        <nz-form-control [nzSm]="14">
+          <input nz-input type=number formControlName="balancedData" id="balancedData"/>
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item *ngIf="selectedData == 'sCurrentData'">
         <nz-form-label [nzSm]="6" nzRequired nzFor="currentData">현재값</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzErrorTip]="numberErrorTpl">
-          <input nz-input formControlName="currentData" id="currentData"/>
+        <nz-form-control [nzSm]="14">
+          <input nz-input type=number formControlName="currentData" id="currentData"/>
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item *ngIf="selectedData == 'sDiscrepancyRate'">
         <nz-form-label [nzSm]="6" nzRequired nzFor="discrepancyRate">괴리율(%)</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzErrorTip]="numberErrorTpl">
-          <input nz-input formControlName="discrepancyRate" id="discrepancyRate"/>
+        <nz-form-control [nzSm]="14">
+          <input nz-input type=number formControlName="discrepancyRate" id="discrepancyRate"/>
         </nz-form-control>
       </nz-form-item>
 
-      <nz-form-item style="text-align: center">
+      <nz-form-item style="text-align: center; margin-top: 15px;">
         <nz-form-control>
           <button nz-button nzType="primary" style="margin-right: 10px;" [disabled]="!calBalancedPointForm.valid">
             계 산
@@ -59,27 +59,32 @@
         </nz-form-control>
       </nz-form-item>
 
-      <ng-template #numberErrorTpl let-control>
-        <ng-container *ngIf="control.hasError('isNotNumber')">
-          숫자를 입력해주세요.
-        </ng-container>
-        <ng-container *ngIf="control.hasError('required')">
-          값을 채워주세요.
-        </ng-container>
-      </ng-template>
+      <!--      <ng-template #numberErrorTpl let-control>-->
+      <!--        <ng-container *ngIf="control.hasError('isNotNumber')">-->
+      <!--          숫자를 입력해주세요.-->
+      <!--        </ng-container>-->
+      <!--        <ng-container *ngIf="control.hasError('required')">-->
+      <!--          값을 채워주세요.-->
+      <!--        </ng-container>-->
+      <!--      </ng-template>-->
     </form>
 
-    <div style="padding: 10px; border: 1px solid gray; border-radius: 10px; font-weight: bold; font-size: 15px;">
+    <div
+      style="padding: 10px; border: 1px solid gray; border-radius: 10px; font-weight: bold; font-size: 15px; margin: 15px 0 15px 0">
       <h3 style="text-align: center;">Result</h3>
       <div style="margin: 0 20px 0 20px">
+        <p>보유 금액:<span style="float: right">{{rBaseMoney | number}}</span></p>
+        <hr>
         <p *ngIf="selectedData == 'sCurrentData'">
-          괴리율: <span style="float: right">{{rDiscrepancyRate | number}}</span>
+          괴 리 율: <span style="float: right">{{rDiscrepancyRate | number}}</span>
         </p>
         <p *ngIf="selectedData == 'sDiscrepancyRate'">
-          목표가: <span style="float: right">{{rCurrentData | number}}</span>
+          목 표 가: <span style="float: right">{{rCurrentData | number}}</span>
         </p>
-        <p>수  량: <span style="float: right">{{rCount | number}}</span></p>
-        <p>총  액:<span style="float: right">{{rTotalMoney | number}}</span></p>
+        <p>수 량: <span style="float: right">{{rCount | number}}</span></p>
+        <p>추가 금액:<span style="float: right">{{rTotalMoney | number}}</span></p>
+        <hr>
+        <p>총 액:<span style="float: right">{{rBaseMoney + rTotalMoney | number}}</span></p>
       </div>
     </div>
   </div>
