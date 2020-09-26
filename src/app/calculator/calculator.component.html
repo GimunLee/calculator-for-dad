@@ -1,5 +1,5 @@
 <div>
-  <div style="max-width: 350px; margin: auto;">
+  <div style="max-width: 350px; margin: auto; padding: 20px 0 20px 0;">
     <form nz-form [formGroup]="calTypeForm" [nzLayout]="'horizontal'">
       <nz-form-item>
         <nz-form-label [nzXs]="6" nzRequired>계산 방식</nz-form-label>
@@ -68,8 +68,7 @@
     </form>
 
     <div
-      style="padding: 10px; border: 1px solid gray; border-radius: 10px; font-weight: bold; font-size: 15px; margin: 15px 0 15px 0">
-      <h3 style="text-align: center;">Result</h3>
+      style="padding: 10px; border: 1px solid gray; border-radius: 10px; font-weight: bold; font-size: 13px; margin: 15px 0 15px 0">
       <div style="margin: 0 20px 0 20px">
         <p>보유 금액:<span style="float: right">{{rBaseMoney | number}}</span></p>
         <hr>
