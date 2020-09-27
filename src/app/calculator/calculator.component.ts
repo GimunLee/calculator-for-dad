@@ -86,6 +86,10 @@ export class CalculatorComponent implements OnInit {
       this.calBalancedPointForm.controls[key].markAsPristine();
       this.calBalancedPointForm.controls[key].updateValueAndValidity();
     }
+    this.resetResult();
+  }
+
+  resetResult() {
     this.rBaseMoney = '';
     this.rCount = '';
     this.rDiscrepancyRate = '';
@@ -95,7 +99,7 @@ export class CalculatorComponent implements OnInit {
   }
 
   selectType(type: SELECTED_TYPE) {
-    this.resetForm();
+    this.resetResult();
     this.selectedData = type;
     if (this.selectedData === 'sDiscrepancyRate') {
       this.calBalancedPointForm.removeControl('currentData');
