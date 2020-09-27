@@ -48,17 +48,19 @@ export class CalculatorComponent implements OnInit {
 
     if (this.selectedData === 'sCurrentData') { // 현재값으로 괴리율 계산
       const currentData = Number(this.calBalancedPointForm.get('currentData').value); // 현재값
-      this.rDiscrepancyRate = (((balancedData - currentData) / currentData) * 100).toFixed(3);
+      this.rDiscrepancyRate = (((balancedData - currentData) / currentData) * 100).toFixed(2);
       this.rCurrentData = String(currentData);
     } else if (this.selectedData === 'sDiscrepancyRate') { // 괴리율로 목표값 계산
       const discrepancyRate = Number(this.calBalancedPointForm.get('discrepancyRate').value); // 괴리율
-      this.rCurrentData = ((balancedData * (100 - discrepancyRate)) / 100).toFixed(3);
+      this.rCurrentData = ((balancedData * (100 - discrepancyRate)) / 100).toFixed(2);
     }
 
-    this.rCount = ((baseData * baseCount - balancedData) / (balancedData + Number(this.rCurrentData))).toFixed(3);
+    // this.rCount = ((baseData * baseCount - balancedData) / (balancedData + Number(this.rCurrentData))).toFixed(3);
+    this.rCount = (((baseData - balancedData) * baseCount) / (balancedData - Number(this.rCurrentData))).toFixed(2);
+    console.log(((baseData * baseCount - balancedData) / (balancedData + Number(this.rCurrentData))).toFixed(2));
     this.rTotalMoney = (Number(this.rCount) * Number(this.rCurrentData)).toFixed(0);
     this.rBaseMoney = (Number(baseData) * Number(baseCount)).toFixed(0);
-    this.rSumMoeny = (Number(baseData) + Number(this.rTotalMoney)).toFixed(0);
+    this.rSumMoeny = (Number(baseData) * Number(baseCount) + Number(this.rTotalMoney)).toFixed(0);
   }
 
   numberValidator = (control: FormControl) =>
@@ -81,10 +83,12 @@ export class CalculatorComponent implements OnInit {
       this.calBalancedPointForm.controls[key].markAsPristine();
       this.calBalancedPointForm.controls[key].updateValueAndValidity();
     }
+    this.rBaseMoney = '';
     this.rCount = '';
     this.rDiscrepancyRate = '';
     this.rCurrentData = '';
     this.rTotalMoney = '';
+    this.rSumMoeny = '';
   }
 
   selectType(type: SELECTED_TYPE) {
