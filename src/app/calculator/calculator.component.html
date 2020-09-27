@@ -44,7 +44,7 @@
       <nz-form-item *ngIf="selectedData == 'sDiscrepancyRate'">
         <nz-form-label [nzSm]="6" nzRequired nzFor="discrepancyRate">괴리율(%)</nz-form-label>
         <nz-form-control [nzSm]="14">
-          <input nz-input type=number formControlName="discrepancyRate" id="discrepancyRate"/>
+          <input nz-input type=number formControlName="discrepancyRate" id="discrepancyRate" (keyup)="calculate()"/>
         </nz-form-control>
       </nz-form-item>
 
