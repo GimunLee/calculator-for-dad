@@ -56,8 +56,11 @@ export class CalculatorComponent implements OnInit {
     }
 
     // this.rCount = ((baseData * baseCount - balancedData) / (balancedData + Number(this.rCurrentData))).toFixed(3);
-    this.rCount = (((baseData - balancedData) * baseCount) / (balancedData - Number(this.rCurrentData))).toFixed(2);
-    console.log(((baseData * baseCount - balancedData) / (balancedData + Number(this.rCurrentData))).toFixed(2));
+    let temp = balancedData - Number(this.rCurrentData);
+    if (temp === 0) {
+      temp = 1;
+    }
+    this.rCount = (((baseData - balancedData) * baseCount) / temp).toFixed(2);
     this.rTotalMoney = (Number(this.rCount) * Number(this.rCurrentData)).toFixed(0);
     this.rBaseMoney = (Number(baseData) * Number(baseCount)).toFixed(0);
     this.rSumMoeny = (Number(baseData) * Number(baseCount) + Number(this.rTotalMoney)).toFixed(0);
