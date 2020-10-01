@@ -1,0 +1,58 @@
+<div>
+  <div style="margin-bottom: 20px;">
+    <div nz-row [nzGutter]="16" style=" margin-bottom: 10px;">
+      <div nz-col class="gutter-row" [nzSpan]="12">
+        <div class="head"><span nz-text>평균 단가</span></div>
+        <div class="data"><span nz-text>{{resultData.average | number}} </span></div>
+      </div>
+      <div nz-col class="gutter-row" [nzSpan]="12">
+        <div class="head"><span nz-text>보유 수량</span></div>
+        <div class="data"><span nz-text>{{resultData.count | number}}</span></div>
+      </div>
+    </div>
+    <div nz-row [nzGutter]="16">
+      <div nz-col class="gutter-row" [nzSpan]="12" style=" margin-bottom: 10px;">
+        <div class="head"><span nz-text>총 금액</span></div>
+        <div class="data"><span nz-text>{{resultData.totalPrice | number}}</span></div>
+      </div>
+      <div nz-col class="gutter-row" [nzSpan]="12">
+        <div class="head"><span nz-text>손익</span></div>
+        <div class="data"><span nz-text>{{resultData.profitAndLoss | number}}</span></div>
+      </div>
+    </div>
+    <button nz-button (click)="resetForm($event)">초기화</button>
+  </div>
+
+  <div>
+    <form nz-form [formGroup]="exchangeForm">
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" nzRequired nzFor="i_price">금액</nz-form-label>
+        <nz-form-control [nzSm]="14">
+          <input nz-input type=number formControlName="i_price" id="i_price"/>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" nzRequired nzFor="i_count">수량</nz-form-label>
+        <nz-form-control [nzSm]="14">
+          <input nz-input type=number formControlName="i_count" id="i_count"/>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item style="text-align: center; margin-top: 15px;">
+        <nz-form-control>
+          <button (click)="buy()" nz-button nzType="primary" style="margin-right: 10px;"
+                  [disabled]="!exchangeForm.valid">
+            매 수
+          </button>
+          <button (click)="sell()" nz-button nzType="danger" style="margin-right: 10px;"
+                  [disabled]="!exchangeForm.valid">
+            매 도
+          </button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+
+
+  </div>
+</div>

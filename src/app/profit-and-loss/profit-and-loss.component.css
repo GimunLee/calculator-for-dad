@@ -1,0 +1,12 @@
+.data {
+  text-align: right;
+  border: gray 1px solid;
+  padding: 5px;
+}
+
+.head{
+  font-weight: bold;
+  text-align: center;
+  border: gray 1px solid;
+
+}

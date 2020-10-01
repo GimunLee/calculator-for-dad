@@ -11,14 +11,24 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { ko_KR } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import ko from '@angular/common/locales/ko';
-import { NzButtonModule, NzFormModule, NzInputModule, NzSelectModule } from 'ng-zorro-antd';
+import {
+  NzButtonModule,
+  NzDividerModule,
+  NzFormModule,
+  NzInputModule,
+  NzSelectModule,
+  NzTableModule, NzTabsModule,
+  NzTypographyModule
+} from 'ng-zorro-antd';
+import { ProfitAndLossComponent } from './profit-and-loss/profit-and-loss.component';
 
 registerLocaleData(ko);
 
 @NgModule({
   declarations: [
     AppComponent,
-    CalculatorComponent
+    CalculatorComponent,
+    ProfitAndLossComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +40,11 @@ registerLocaleData(ko);
     ReactiveFormsModule,
     NzSelectModule,
     NzInputModule,
-    NzButtonModule
+    NzButtonModule,
+    NzTableModule,
+    NzTypographyModule,
+    NzDividerModule,
+    NzTabsModule
   ],
   providers: [{ provide: NZ_I18N, useValue: ko_KR }],
   bootstrap: [AppComponent]
