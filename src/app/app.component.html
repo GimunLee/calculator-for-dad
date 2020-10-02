@@ -1,5 +1,4 @@
-<div style="max-width: 400px; margin: auto; padding: 20px 0 20px 0;">
-
+<div style="max-width: 350px; margin: auto; padding: 20px 0 20px 0;">
   <nz-tabset [nzSelectedIndex]="selectedTabPosition">
     <nz-tab *ngFor="let i of tabs" [nzTitle]="tabTitleTemplate" (nzClick)="changeTab(i)">
       <ng-template #tabTitleTemplate>{{ i.tab }}</ng-template>
