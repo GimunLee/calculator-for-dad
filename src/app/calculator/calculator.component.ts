@@ -44,24 +44,22 @@ export class CalculatorComponent implements OnInit {
   calculate() {
     const baseData = Number(this.calBalancedPointForm.get('baseData').value);
     const baseCount = Number(this.calBalancedPointForm.get('baseCount').value);
-    const balancedData = Number(this.calBalancedPointForm.get('balancedData').value);
+    const currentData = Number(this.calBalancedPointForm.get('currentData').value); // 현재값
 
     if (this.selectedData === 'sCurrentData') { // 현재값으로 괴리율 계산
-      const currentData = Number(this.calBalancedPointForm.get('currentData').value); // 현재값
-      this.rDiscrepancyRate = (((balancedData - currentData) / currentData) * 100).toFixed(2);
+      const balancedData = Number(this.calBalancedPointForm.get('balancedData').value);
+      this.rDiscrepancyRate = (((baseData - balancedData) / baseData) * 100).toFixed(2);
       this.rCurrentData = String(currentData);
+      let temp = balancedData - Number(this.rCurrentData);
+      if (temp === 0) {
+        temp = 1;
+      }
+      this.rCount = (((baseData - balancedData) * baseCount) / temp).toFixed(2);
     } else if (this.selectedData === 'sDiscrepancyRate') { // 괴리율로 목표값 계산
       const discrepancyRate = Number(this.calBalancedPointForm.get('discrepancyRate').value); // 괴리율
-      this.rCurrentData = ((balancedData * (100 - discrepancyRate)) / 100).toFixed(2);
+      this.rCount = (-(discrepancyRate * baseData * baseCount) / (100 * currentData - 100 * baseData + baseData * discrepancyRate)).toFixed(2);
     }
-
-    // this.rCount = ((baseData * baseCount - balancedData) / (balancedData + Number(this.rCurrentData))).toFixed(3);
-    let temp = balancedData - Number(this.rCurrentData);
-    if (temp === 0) {
-      temp = 1;
-    }
-    this.rCount = (((baseData - balancedData) * baseCount) / temp).toFixed(2);
-    this.rTotalMoney = (Number(this.rCount) * Number(this.rCurrentData)).toFixed(0);
+    this.rTotalMoney = (Number(this.rCount) * currentData).toFixed(0);
     this.rBaseMoney = (Number(baseData) * Number(baseCount)).toFixed(0);
     this.rSumMoeny = (Number(baseData) * Number(baseCount) + Number(this.rTotalMoney)).toFixed(0);
   }
@@ -102,11 +100,11 @@ export class CalculatorComponent implements OnInit {
     this.resetResult();
     this.selectedData = type;
     if (this.selectedData === 'sDiscrepancyRate') {
-      this.calBalancedPointForm.removeControl('currentData');
+      this.calBalancedPointForm.removeControl('balancedData');
       this.calBalancedPointForm.addControl('discrepancyRate', new FormControl('', [Validators.required], [this.numberValidator]));
     } else if (this.selectedData === 'sCurrentData') {
       this.calBalancedPointForm.removeControl('discrepancyRate');
-      this.calBalancedPointForm.addControl('currentData', new FormControl('', [Validators.required], [this.numberValidator]));
+      this.calBalancedPointForm.addControl('balancedData', new FormControl('', [Validators.required], [this.numberValidator]));
     }
   }
 }

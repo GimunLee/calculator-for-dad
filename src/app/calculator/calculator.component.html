@@ -26,14 +26,14 @@
       </nz-form-control>
     </nz-form-item>
 
-    <nz-form-item>
+    <nz-form-item *ngIf="selectedData == 'sCurrentData'">
       <nz-form-label [nzSm]="6" nzRequired nzFor="balancedData">균형값</nz-form-label>
       <nz-form-control [nzSm]="14">
         <input nz-input type=number formControlName="balancedData" id="balancedData"/>
       </nz-form-control>
     </nz-form-item>
 
-    <nz-form-item *ngIf="selectedData == 'sCurrentData'">
+    <nz-form-item>
       <nz-form-label [nzSm]="6" nzRequired nzFor="currentData">현재값</nz-form-label>
       <nz-form-control [nzSm]="14">
         <input nz-input type=number formControlName="currentData" id="currentData"/>
@@ -73,9 +73,6 @@
       <hr>
       <p *ngIf="selectedData == 'sCurrentData'">
         괴 리 율: <span style="float: right">{{rDiscrepancyRate | number}}</span>
-      </p>
-      <p *ngIf="selectedData == 'sDiscrepancyRate'">
-        현 재 값: <span style="float: right">{{rCurrentData | number}}</span>
       </p>
       <p>수 량: <span style="float: right">{{rCount | number}}</span></p>
       <p>추가 금액:<span style="float: right">{{rTotalMoney | number}}</span></p>
