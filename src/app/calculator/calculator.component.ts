@@ -46,18 +46,18 @@ export class CalculatorComponent implements OnInit {
     const baseCount = Number(this.calBalancedPointForm.get('baseCount').value);
     const currentData = Number(this.calBalancedPointForm.get('currentData').value); // 현재값
 
-    if (this.selectedData === 'sCurrentData') { // 현재값으로 괴리율 계산
+    if (this.selectedData === 'sCurrentData') {
       const balancedData = Number(this.calBalancedPointForm.get('balancedData').value);
-      this.rDiscrepancyRate = (((baseData - balancedData) / baseData) * 100).toFixed(2);
+      this.rDiscrepancyRate = (((currentData - balancedData) / balancedData) * 100).toFixed(2);
       this.rCurrentData = String(currentData);
       let temp = balancedData - Number(this.rCurrentData);
       if (temp === 0) {
         temp = 1;
       }
       this.rCount = (((baseData - balancedData) * baseCount) / temp).toFixed(2);
-    } else if (this.selectedData === 'sDiscrepancyRate') { // 괴리율로 목표값 계산
-      const discrepancyRate = Number(this.calBalancedPointForm.get('discrepancyRate').value); // 괴리율
-      this.rCount = (-(discrepancyRate * baseData * baseCount) / (100 * currentData - 100 * baseData + baseData * discrepancyRate)).toFixed(2);
+    } else if (this.selectedData === 'sDiscrepancyRate') {
+      const discrepancyRate = Number(this.calBalancedPointForm.get('discrepancyRate').value) / 100;
+      this.rCount = (((baseData - currentData) * baseCount - (discrepancyRate * baseCount * baseData)) / (currentData * discrepancyRate)).toFixed(2);
     }
     this.rTotalMoney = (Number(this.rCount) * currentData).toFixed(0);
     this.rBaseMoney = (Number(baseData) * Number(baseCount)).toFixed(0);
